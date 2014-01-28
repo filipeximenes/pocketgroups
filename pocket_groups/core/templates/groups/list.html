@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Groups
+        <small>
+            <span class="btn-group">
+                <a role="button" class="btn btn-mini" href="{% url 'groups:create' %}">New</a>
+            </span>
+        </small>
+    </h1>
+    <div class="row">
+        <ul>
+        {% for group in pocket_groups.all %}
+            <li class="col-md-3 text-center">
+                <h2>{{ group.name }}</h2>
+                <label>Tag: </label><span>{{ group.tag }}</span><br>
+                {% if group.owner == user %}
+                    <a href="{% url 'groups:update' group.id %}">editar</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
