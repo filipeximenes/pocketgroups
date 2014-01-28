@@ -43,6 +43,8 @@ def provision_django():
 
 
 def start_deploy_django():
+    local('git push origin master:master')
+
     with virtualenv(server_config.VIRTUALENV_FOLDER):
         with cd(server_config.DJANGO_PROJECT_FOLDER):
             run('sudo git pull origin')
@@ -59,7 +61,7 @@ def start_deploy_django():
                 '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
                 )
 
-            run('sudo supervisorctl restart pocket_groups ')
+            run('sudo supervisorctl restart pocket_groups')
             run('sudo service nginx restart')
 
 
