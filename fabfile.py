@@ -35,7 +35,6 @@ def start_provisioning():
     # run('sudo git clone ' + server_config.HTTPS_GIT_REPO + ' ' + server_config.DJANGO_PROJECT_FOLDER)
 
 
-
 def provision_django():
     env.roles = ['django_provision']
     server()
@@ -45,17 +44,18 @@ def provision_django():
 def start_deploy_django():
     with virtualenv(server_config.VIRTUALENV_FOLDER):
         with cd(server_config.DJANGO_PROJECT_FOLDER):
-            run('sudo git pull origin')
-            run('pip install -r requirements.txt')
+            # run('sudo git pull origin')
+            # run('pip install -r requirements.txt')
 
             run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
-            run('sudo cp nginx.conf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
+            run('sudo cp -fT nginx.conf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
 
             run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
             run('sudo ln -fs /etc/nginx/sites-available/' + server_config.PROJECT_NAME + ' '+
                 '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
                 )
 
+            run('kill `cat ' + server_config.DJANGO_PROJECT_FOLDER + '/gunicorn_config.py`')
             run('gunicorn -c ' + server_config.DJANGO_PROJECT_FOLDER + 
                 '/gunicorn_config.py ' + server_config.PROJECT_NAME + '.wsgi')
             run('sudo service nginx restart')
