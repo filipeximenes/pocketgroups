@@ -17,6 +17,8 @@ def server():
 
 def setup_config_files():
     with cd(server_config.DJANGO_PROJECT_FOLDER):
+        execute('start_deploy_django')
+
         run('sudo rm -rf /etc/supervisor/conf.d/' + server_config.PROJECT_NAME + '.conf')
         run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
         run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
@@ -26,8 +28,6 @@ def setup_config_files():
         run('sudo ln -fs /etc/nginx/sites-available/' + server_config.PROJECT_NAME + ' '+
             '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
             )
-
-        execute('start_deploy_django')
 
         with settings(warn_only=True):
             run('sudo service supervisor start')
@@ -56,15 +56,15 @@ def push():
 
 
 def start_provisioning():
-    # run('sudo apt-get update')
-    # run('sudo apt-get install -y python-virtualenv python-pip fabric')
-    # run('sudo apt-get install -y python-software-properties')
-    # run('sudo apt-get install -y build-essential python2.7-dev')
-    # run('sudo apt-get install -y libsqlite3-dev git supervisor')
+    run('sudo apt-get update')
+    run('sudo apt-get install -y python-virtualenv python-pip fabric')
+    run('sudo apt-get install -y python-software-properties')
+    run('sudo apt-get install -y build-essential python2.7-dev')
+    run('sudo apt-get install -y libsqlite3-dev git supervisor')
 
-    # run('sudo add-apt-repository -y ppa:nginx/stable')
-    # run('sudo apt-get update')
-    # run('sudo apt-get install -y nginx')
+    run('sudo add-apt-repository -y ppa:nginx/stable')
+    run('sudo apt-get update')
+    run('sudo apt-get install -y nginx')
 
     run('sudo mkdir -p ' + server_config.DJANGO_PROJECT_FOLDER)
     run('sudo git clone ' + server_config.HTTPS_GIT_REPO + ' ' + server_config.DJANGO_PROJECT_FOLDER)
@@ -75,7 +75,7 @@ def start_provisioning():
 def provision_django():
     env.roles = ['django_provision']
     server()
-    execute('start_provisioning')
+    # execute('start_provisioning')
     execute('setup_config_files')
     execute('restart_services')
 
