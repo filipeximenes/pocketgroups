@@ -53,7 +53,7 @@ def push():
     execute('push_key')
 
 
-def start_provisioning():
+def prepare_server():
     run('sudo apt-get update')
     run('sudo apt-get install -y python-virtualenv python-pip fabric')
     run('sudo apt-get install -y python-software-properties')
@@ -73,7 +73,7 @@ def start_provisioning():
 def provision_django():
     env.roles = ['django_provision']
     server()
-    execute('start_provisioning')
+    # execute('prepare_server')
     execute('start_deploy_django')
     execute('setup_config_files')
     execute('restart_services')
