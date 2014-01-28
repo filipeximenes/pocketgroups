@@ -48,6 +48,7 @@ def start_deploy_django():
             run('sudo git pull origin')
             run('pip install -r requirements.txt')
 
+            run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
             run('sudo cp nginx.conf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
 
             run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
