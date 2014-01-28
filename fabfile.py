@@ -44,7 +44,7 @@ def provision_django():
 def start_deploy_django():
     with virtualenv(server_config.VIRTUALENV_FOLDER):
         with cd(server_config.DJANGO_PROJECT_FOLDER):
-            # run('sudo git pull origin')
+            run('sudo git pull origin')
             # run('pip install -r requirements.txt')
 
             run('sudo rm -rf /etc/supervisor/conf.d/pocket_groups.conf')
