@@ -6,3 +6,6 @@ pysqlite==2.6.3
 requests==2.2.1
 six==1.5.2
 wsgiref==0.1.2
+Fabric==1.8.1
+fabric-virtualenv==0.2.1
+gunicorn==18.0

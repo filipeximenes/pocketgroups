@@ -18,4 +18,7 @@ urlpatterns = patterns('',
     url(r'^groups/', include('groups.urls', namespace='groups')),
 
     url(r'^admin/', include(admin.site.urls)),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
