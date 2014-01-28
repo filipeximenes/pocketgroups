@@ -28,6 +28,7 @@ def start_provisioning():
     # run('sudo apt-get install -y nginx')
     
     # run('sudo apt-get install -y git')
+    # run('sudo apt-get install -y supervisor')
 
     # make_virtualenv(server_config.VIRTUALENV_FOLDER)
 
@@ -58,10 +59,8 @@ def start_deploy_django():
                 '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
                 )
 
-            # run('kill `cat ' + server_config.DJANGO_PROJECT_FOLDER + '/gunicorn_config.py`')
-            # run('gunicorn -c ' + server_config.DJANGO_PROJECT_FOLDER + 
-            #     '/gunicorn_config.py ' + server_config.PROJECT_NAME + '.wsgi')
             run('sudo service nginx restart')
+            run('sudo supervisorctl restart pocket_groups ')
 
 
 def deploy_django():
