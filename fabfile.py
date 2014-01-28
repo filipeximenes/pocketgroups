@@ -59,8 +59,8 @@ def start_deploy_django():
                 '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
                 )
 
-            run('sudo service nginx restart')
             run('sudo supervisorctl restart pocket_groups ')
+            run('sudo service nginx restart')
 
 
 def deploy_django():
