@@ -21,6 +21,7 @@ def start_provisioning():
     # run('sudo apt-get install -y python-virtualenv python-pip fabric')
     # run('sudo apt-get install -y python-software-properties')
     # run('sudo apt-get install -y build-essential python2.7-dev')
+    # run('sudo apt-get install -y libsqlite3-dev')
     
     # run('sudo add-apt-repository ppa:nginx/stable')
     # run('sudo apt-get update')
@@ -34,6 +35,13 @@ def start_provisioning():
     # run('sudo git clone ' + server_config.HTTPS_GIT_REPO + ' ' + server_config.DJANGO_PROJECT_FOLDER)
 
 
+
+def provision_django():
+    env.roles = ['django_provision']
+    server()
+    execute('start_provisioning')
+
+
 def start_deploy_django():
     with virtualenv(server_config.VIRTUALENV_FOLDER):
         with cd(server_config.DJANGO_PROJECT_FOLDER):
@@ -42,18 +50,14 @@ def start_deploy_django():
 
             run('sudo cp nginx.conf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
 
-            run('sudo ln /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME + ' '+
-                '/etc/nginx/sites-available/' + server_config.PROJECT_NAME)
+            run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
+            run('sudo ln -fs /etc/nginx/sites-available/' + server_config.PROJECT_NAME + ' '+
+                '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
+                )
 
             run('gunicorn -c ' + server_config.DJANGO_PROJECT_FOLDER + 
                 '/gunicorn_config.py ' + server_config.PROJECT_NAME + '.wsgi')
             run('sudo service nginx restart')
-
-
-def provision_django():
-    env.roles = ['django_provision']
-    server()
-    execute('start_provisioning')
 
 
 def deploy_django():

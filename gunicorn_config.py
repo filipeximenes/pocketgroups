@@ -1,5 +1,5 @@
 
-from . import server_config
+import server_config
 
 command = server_config.VIRTUALENV_FOLDER + '/bin/gunicorn'
 pythonpath = server_config.DJANGO_PROJECT_FOLDER
