@@ -47,17 +47,20 @@ def start_deploy_django():
             # run('sudo git pull origin')
             # run('pip install -r requirements.txt')
 
-            run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
-            run('sudo cp -fT nginx.conf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
+            run('sudo rm -rf /etc/supervisor/conf.d/pocket_groups.conf')
+            run('sudo cp -fT supervisor.conf /etc/supervisor/conf.d/pocket_groups.conf')
 
             run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
+            run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
+
+            run('sudo cp -fT nginx.conf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
             run('sudo ln -fs /etc/nginx/sites-available/' + server_config.PROJECT_NAME + ' '+
                 '/etc/nginx/sites-enabled/' + server_config.PROJECT_NAME
                 )
 
-            run('kill `cat ' + server_config.DJANGO_PROJECT_FOLDER + '/gunicorn_config.py`')
-            run('gunicorn -c ' + server_config.DJANGO_PROJECT_FOLDER + 
-                '/gunicorn_config.py ' + server_config.PROJECT_NAME + '.wsgi')
+            # run('kill `cat ' + server_config.DJANGO_PROJECT_FOLDER + '/gunicorn_config.py`')
+            # run('gunicorn -c ' + server_config.DJANGO_PROJECT_FOLDER + 
+            #     '/gunicorn_config.py ' + server_config.PROJECT_NAME + '.wsgi')
             run('sudo service nginx restart')
 
 
