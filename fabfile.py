@@ -17,8 +17,6 @@ def server():
 
 def setup_config_files():
     with cd(server_config.DJANGO_PROJECT_FOLDER):
-        execute('start_deploy_django')
-
         run('sudo rm -rf /etc/supervisor/conf.d/' + server_config.PROJECT_NAME + '.conf')
         run('sudo rm -rf /etc/nginx/sites-available/' + server_config.PROJECT_NAME)
         run('sudo rm -rf /etc/nginx/sites-enabled/' + server_config.PROJECT_NAME)
@@ -75,7 +73,8 @@ def start_provisioning():
 def provision_django():
     env.roles = ['django_provision']
     server()
-    # execute('start_provisioning')
+    execute('start_provisioning')
+    execute('start_deploy_django')
     execute('setup_config_files')
     execute('restart_services')
 
