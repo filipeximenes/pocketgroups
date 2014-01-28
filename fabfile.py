@@ -73,7 +73,7 @@ def prepare_server():
 def provision_django():
     env.roles = ['django_provision']
     server()
-    # execute('prepare_server')
+    execute('prepare_server')
     execute('start_deploy_django')
     execute('setup_config_files')
     execute('restart_services')
@@ -84,6 +84,9 @@ def start_deploy_django():
         with cd(server_config.DJANGO_PROJECT_FOLDER):
             run('sudo git pull origin')
             run('pip install -r requirements.txt')
+
+    execute('setup_config_files')
+    execute('restart_services')
 
 
 def deploy_django():
