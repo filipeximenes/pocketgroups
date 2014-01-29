@@ -18,7 +18,7 @@ logger = get_task_logger(__name__)
 
 @celery_app.task
 def fetch_groups():
-    groups = PocketGroup.objects.order_by('last_verifyed')
+    groups = PocketGroup.objects.order_by('last_addition')
 
     for group in groups:
         share_group_urls.delay(group.id)
