@@ -65,7 +65,6 @@ def share_group_urls(group_id):
                     for item in shared_items:
                         if not 'pocketgroups' in item['tags'] and \
                             item['time_added'] > last_addition:
-                            print data
                             pocket_cli.add(
                                 url=item['url'],
                                 tags='pocketgroups,' + group.tag + ',' + sharing_user.pocket_username
@@ -77,6 +76,8 @@ def share_group_urls(group_id):
     if newest_item > 0:
         group.last_addition = newest_item
         group.save()
+
+    logger.info('Remaining API calls (for the current hour): %s' % headers['x-limit-key-remaining'])
 
 
 def process_response(user, response):
