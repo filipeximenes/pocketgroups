@@ -39,18 +39,23 @@ def restart_services():
     run('sudo service nginx restart')
 
 
-def push_key():
-    keyfile = '/tmp/%s.pub' % env.user
-    run('mkdir -p ~/.ssh && chmod 700 ~/.ssh')
-    put('~/.ssh/id_rsa.pub', keyfile)
-    run('cat %s >> ~/.ssh/authorized_keys' % keyfile)
-    run('rm %s' % keyfile)
+# def push_key():
+#     # keyfile = '/tmp/%s.pub' % env.user
+#     # run('mkdir -p ~/.ssh && chmod 700 ~/.ssh')
+#     # put('~/.ssh/id_rsa.pub', keyfile)
+#     # run('cat %s >> ~/.ssh/authorized_keys' % keyfile)
+#     # run('rm %s' % keyfile)
+#     key = '~/.ssh/' + server_config.PROJECT_NAME
+#     keypub = '~/.ssh/' + server_config.PROJECT_NAME + '.pub'
+#     run('mkdir -p ~/.ssh && chmod 700 ~/.ssh')
+#     put(key, '~/.ssh/id_rsa')
+#     put(keypub, '~/.ssh/id_rsa.pub')
 
 
-def push():
-    env.roles = ['django_provision']
-    server()
-    execute('push_key')
+# def push():
+#     env.roles = ['django_provision']
+#     server()
+#     execute('push_key')
 
 
 def prepare_server():

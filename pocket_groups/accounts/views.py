@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model, login
 
 from pocket import Pocket
 
+from accounts.models import UserAccount
+
 
 class LoginCallbackView(generic.RedirectView):
     http_method_names = ['get']
@@ -14,7 +16,6 @@ class LoginCallbackView(generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         request_token = self.request.GET.get('request_token', None)
-        username = self.request.GET.get('username', None)
 
         if request_token:
             credentials = Pocket.get_credentials(
@@ -22,7 +23,28 @@ class LoginCallbackView(generic.RedirectView):
                 code=request_token
                 )
 
-            user, created = get_user_model().objects.get_or_create(pocket_username=credentials['username'])
+            email = None
+            localized = None
+
+            user = get_user_model().objects.filter(pocket_username=credentials['username']).first()
+
+            localizer = self.request.session.get('user_localizer', None)
+            if localizer:
+                localized = get_user_model().objects.filter(localizer=localizer).first()
+
+            if localized:
+                email = localized.email
+                if user:
+                    user.pocket_groups.add(localized.pocket_groups.all())
+                    localized.dalete()
+                else:
+                    user = localized
+
+            if not user:
+                user = UserAccount()
+
+            user.email = email or user.email
+            user.pocket_username = credentials['username']
             user.pocket_access_token = credentials['access_token']
             user.save()
 

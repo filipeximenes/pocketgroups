@@ -61,13 +61,13 @@ class UserAccountAdmin(UserAdmin):
     ordering = ('pocket_username',)
     filter_horizontal = ('groups', 'user_permissions',)
     fieldsets = (
-        (None, {'fields': ('name', 'pocket_username', 'password')}),
+        (None, {'fields': ('name', 'pocket_username', 'password', 'email', 'localizer')}),
         ('Permissions', {'fields': ('is_active',
                                 'is_staff',
                                 'is_superuser',
                                 'groups',
                                 'user_permissions',
-                                'access_token')}),
+                                'pocket_access_token')}),
         ('Important dates', {'fields': ('last_login',)}),
     )
     

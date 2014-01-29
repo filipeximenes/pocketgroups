@@ -1,5 +1,6 @@
 
 from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
 from django.views import generic
 from django.http import HttpResponseRedirect
 
@@ -25,6 +26,31 @@ class GroupFormMixin(LoginRequiredMixin, FormMessagesMixin):
     def get_success_url(self):
         return reverse('groups:list')
 
+    def get_context_data(self, **kwargs):
+        remaining = [1,2,3,4]
+        kwargs['remaining_emails'] = remaining
+        if self.object:
+            kwargs['remaining_emails'] = remaining[self.object.members.count()-1:]
+
+        return kwargs
+
+    def form_valid(self, form):
+        invited_users = []
+        for i in range(5):
+            email = form.data.get('invite-email'+str(i), None)
+            if email:
+                print email
+                user, created = get_user_model().objects.get_or_create(
+                    email=email, defaults={'pocket_username': email})
+                invited_users.append(user)
+
+        if invited_users:
+            self.object.members.add(*invited_users)
+            pass
+            # send_invitation_email(self.request.user, invited_users)
+
+        return super(GroupFormMixin, self).form_valid(form)
+
 
 class GroupCreateView(GroupFormMixin, generic.CreateView):
     template_name = 'groups/create.html'
@@ -32,11 +58,12 @@ class GroupCreateView(GroupFormMixin, generic.CreateView):
 
     def form_valid(self, form):
         current_user = self.request.user
-        group = form.save(commit=False)
-        group.owner = current_user
-        group.save()
-        group.members.add(current_user)
-        return HttpResponseRedirect(self.get_success_url())
+        self.object = form.save(commit=False)
+        self.object.owner = current_user
+        self.object.save()
+        self.object.members.add(current_user)
+        
+        return super(GroupCreateView, self).form_valid(form)
 
 
 class GroupUpdateView(UserPassesTestMixin, GroupFormMixin, generic.UpdateView):
