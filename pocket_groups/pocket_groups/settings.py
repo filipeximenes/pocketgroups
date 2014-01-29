@@ -21,17 +21,17 @@ LOGIN_URL = '/index/'
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'la8^m1r7-%$lvs!7l@kvhs!wcz_x+225lhfdsfadsflr031'
+SECRET_KEY = ''
 
 # Pocket
-POCKET_CONSUMER_KEY = '23211-de874a5105ac80f7dab6b41f'
+POCKET_CONSUMER_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -75,6 +75,10 @@ DATABASES = {
     }
 }
 
+# import dj_database_url
+# DATABASES = {}
+# DATABASES['dafault'] = dj_database_url.config()
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -94,7 +98,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Templated email
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
 
 # CELERY
 BROKER_URL = 'amqp://@localhost:5672//'
 CELERY_TIMEZONE = TIME_ZONE
+
+# Email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

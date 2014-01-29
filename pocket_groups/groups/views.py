@@ -3,9 +3,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
 
 from braces.views import LoginRequiredMixin, UserPassesTestMixin, FormMessagesMixin
 
+from groups.tasks import send_invite_emails
 from .models import PocketGroup
 
 
@@ -39,14 +41,13 @@ class GroupFormMixin(LoginRequiredMixin, FormMessagesMixin):
         for i in range(5):
             email = form.data.get('invite-email'+str(i), None)
             if email:
-                print email
                 user, created = get_user_model().objects.get_or_create(
                     email=email, defaults={'pocket_username': email})
-                invited_users.append(user)
+                invited_users.append(user.id)
 
         if invited_users:
             self.object.members.add(*invited_users)
-            # send_invitation_email(self.request.user, invited_users)
+            send_invite_emails.delay(self.object.id, invited_users)
 
         return super(GroupFormMixin, self).form_valid(form)
 
@@ -71,3 +72,22 @@ class GroupUpdateView(UserPassesTestMixin, GroupFormMixin, generic.UpdateView):
 
     def test_func(self, user):
         return user == self.get_object().owner
+
+
+class RemoveMemberView(generic.RedirectView):
+    http_method_names = ['post']
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        member_id = self.request.POST.get('member_id')
+        group_id = kwargs['pk']
+
+        group = PocketGroup.objects.get(id=group_id)
+
+        if group.owner != self.request.user:
+            raise PermissionDenied()
+        
+        group.members.remove(member_id)
+
+        return reverse('groups:update', kwargs={'pk': group_id})
+

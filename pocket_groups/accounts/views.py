@@ -37,7 +37,7 @@ class LoginCallbackView(generic.RedirectView):
                 if user:
                     groups = localized.pocket_groups.values_list('id', flat=True)
                     user.pocket_groups.add(*groups)
-                    if not localized.id_active:
+                    if not localized.is_active:
                         localized.delete()
                 else:
                     user = localized

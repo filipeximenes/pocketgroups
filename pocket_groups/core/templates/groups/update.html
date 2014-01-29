@@ -4,4 +4,16 @@
 {% block content %}
     <h1>Edit Group</h1>
     {% include 'groups/form.html' %}
+    <h3>Members:</h3>
+    {% if form.instance.id %}
+        {% for member in form.instance.members.all %}
+            {% if member != user %}
+                <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
+                    {% csrf_token %}
+                <input type="hidden" name="member_id" value="{{ member.id }}">
+                    <span>{{ member.pocket_username }}</span> <small><input type='submit' value="remove"></small><br>
+                </form>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

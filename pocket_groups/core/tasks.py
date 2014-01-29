@@ -1,5 +1,4 @@
 
-# import time
 from django.utils import dateformat
 import datetime
 from django.conf import settings
