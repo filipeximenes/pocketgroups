@@ -24,7 +24,7 @@ LOGIN_URL = '/index/'
 SECRET_KEY = 'la8^m1r7-%$lvs!7l@kvhs!wcz_x+225lhfdsfadsflr031'
 
 # Pocket
-POCKET_CONSUMER_KEY = '23164-b47989d85aed08155b27063d'
+POCKET_CONSUMER_KEY = '23211-de874a5105ac80f7dab6b41f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,7 +32,6 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -81,7 +80,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Recife'
 
 USE_I18N = True
 
@@ -94,3 +93,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# CELERY
+BROKER_URL = 'amqp://@localhost:5672//'
+CELERY_TIMEZONE = TIME_ZONE

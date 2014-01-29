@@ -10,3 +10,10 @@ class PocketGroup(models.Model):
     tag = models.CharField(max_length=255)
 
     members = models.ManyToManyField(get_user_model(), related_name='pocket_groups')
+
+    last_verifyed = models.DateTimeField(null=True, blank=True)
+
+    last_addition = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name

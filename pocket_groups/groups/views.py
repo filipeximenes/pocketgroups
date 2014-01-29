@@ -46,7 +46,6 @@ class GroupFormMixin(LoginRequiredMixin, FormMessagesMixin):
 
         if invited_users:
             self.object.members.add(*invited_users)
-            pass
             # send_invitation_email(self.request.user, invited_users)
 
         return super(GroupFormMixin, self).form_valid(form)
