@@ -13,3 +13,6 @@ hk-config-push:
 hk-config-pull:
 	heroku config:pull --overwrite --app pocketgroups
 
+
+
+# python pip install -r requirements.txt; manage.py syncdb; python manage.py migrate;
