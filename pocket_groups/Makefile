@@ -12,3 +12,4 @@ hk-config-push:
 
 hk-config-pull:
 	heroku config:pull --overwrite --app pocketgroups
+

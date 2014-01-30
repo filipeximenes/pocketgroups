@@ -69,7 +69,7 @@ from dj_database_url import parse as db_url
 DATABASES = {
     'default': config(
         'DATABASE_URL', 
-        # default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
         cast=db_url
     )
 }
@@ -86,6 +86,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 # Pocket
