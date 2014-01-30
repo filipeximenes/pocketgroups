@@ -14,5 +14,10 @@ hk-config-pull:
 	heroku config:pull --overwrite --app pocketgroups
 
 
+hk-deploy:
+	git push heroku master
+	heroku run python manage.py syncdb
+	heroku run python manage.py migrate
+	heroku run python manage.py collecticstatic
 
 # python pip install -r requirements.txt; manage.py syncdb; python manage.py migrate;
