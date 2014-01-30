@@ -102,6 +102,8 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
 # CELERY
 CELERY_TIMEZONE = TIME_ZONE
 BROKER_POOL_LIMIT = 1
+CELERY_IGNORE_RESULT = True
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
 BROKER_URL = config('BROKER_URL', default='amqp://@localhost:5672//')
 
 # Email
