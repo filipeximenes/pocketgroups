@@ -29,6 +29,10 @@ TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
+ADMINS = (
+    ('Ximenes', 'filipeximenes@gmail.com')
+)
+
 # Application definition
 
 INSTALLED_APPS = (
