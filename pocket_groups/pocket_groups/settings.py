@@ -8,28 +8,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from decouple import config
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
-LOGIN_URL = '/index/'
+LOGIN_URL = '/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-
-# Pocket
-POCKET_CONSUMER_KEY = ''
+SECRET_KEY = config('SECRET_KEY', default='abc')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,16 +94,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Pocket
+POCKET_CONSUMER_KEY = config('POCKET_CONSUMER_KEY', default='23252-73547210af1d70d949daf5be')
+
 # Templated email
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
 
 # CELERY
-BROKER_URL = 'amqp://@localhost:5672//'
+BROKER_URL = config('BROKER_URL', default='amqp://@localhost:5672//')
 CELERY_TIMEZONE = TIME_ZONE
 
 # Email
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='pocketgroupsemail@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='c0azML1FvKwCdr28iTJH3n1a57lRU2')

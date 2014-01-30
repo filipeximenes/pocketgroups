@@ -13,3 +13,4 @@ celery==3.1.8
 psycopg2==2.5.2
 dj-database-url==0.2.2
 django-templated-email==0.4.9
+django-decouple==2.1
