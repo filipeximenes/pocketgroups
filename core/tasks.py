@@ -6,6 +6,7 @@ from django.utils.timezone import now
 
 from pocket_groups import celery_app
 from groups.models import PocketGroup
+from articles.models import Article
 
 from celery.utils.log import get_task_logger
 
@@ -17,7 +18,7 @@ logger = get_task_logger(__name__)
 
 @celery_app.task
 def fetch_groups():
-    groups = PocketGroup.objects.order_by('last_addition')
+    groups = PocketGroup.objects.order_by('last_synced_article__time_added')
 
     for group in groups:
         share_group_urls.delay(group.id)
@@ -26,21 +27,18 @@ def fetch_groups():
 @celery_app.task
 def share_group_urls(group_id):
     group = PocketGroup.objects.get(id=group_id)
-
     members = group.members.all()
-
-    last_addition = group.last_addition
-    if not last_addition:
-        last_addition = int(dateformat.format(now() - datetime.timedelta(days=1), 'U'))
-
-    last_addition += 1
-
-    newest_item = 0
-
-    members_data = {}
 
     for member in members:
         if member.pocket_access_token:
+            last_article = group.feed.order_by('time_added').filter(shared_by=member).last()
+
+            if last_article:
+                last_addition = last_article.time_added
+            else:
+                last_addition = int(dateformat.format(now() - datetime.timedelta(days=1), 'U'))
+            last_addition += 0
+
             pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
             response, headers = pocket_cli.get(
                     state='all',
@@ -50,58 +48,51 @@ def share_group_urls(group_id):
                     since=last_addition
                 )
 
-            members_data[member.id] = process_response(member, response)
+            process_and_add_to_feed(last_addition, group, member, response)
+
+    feed = group.feed.order_by('time_added') 
+    if group.last_synced_article:
+        feed = feed.filter(id__gt=group.last_synced_article.id)
+    feed = feed.all()
+
+    # print feed[0].id
+    # print group.last_synced_article.id
 
     for member in members:
         if member.pocket_access_token:
             pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
-            
-            for member_id, data in members_data.iteritems():
-                if member_id is not member.id:
-                    sharing_user = data['user']
-                    shared_items = data['items']
 
-                    for item in shared_items:
-                        if not 'pocketgroups' in item['tags'] and \
-                            item['time_added'] > last_addition:
-                            pocket_cli.add(
-                                url=item['url'],
-                                tags='pocketgroups,' + group.tag + ',' + sharing_user.pocket_username
-                                )
+            for article in feed:
+                if article.shared_by != member:
+                    logger.info('Sharing: %s - %s' % (member.pocket_username, article.link))
+                    pocket_cli.add(
+                        url=article.link,
+                        tags='pocketgroups,' + group.tag + ',' + article.shared_by.pocket_username
+                    )
 
-                    if newest_item < data['lastest_date']:
-                        newest_item = data['lastest_date']
-    
-    if newest_item > 0:
-        group.last_addition = newest_item
-        group.save()
+    group.last_synced_article = group.feed.order_by('id').last()
+    group.save()
 
     logger.info('Remaining API calls (for the current hour): %s' % headers['x-limit-key-remaining'])
 
 
-def process_response(user, response):
+def process_and_add_to_feed(minimum_time_added, group, user, response):
     items = response['list']
-
-    response_dict = {
-        'user': user,
-        'items': [],
-        'lastest_date': None,
-    }
 
     if items:
         for item_id, data in items.iteritems():
-            item_dict = {}
-            if int(data['status']) != 2:
-                item_dict['time_added'] = int(data['time_added'])
-                item_dict['tags'] = [tag for tag, _ in data['tags'].iteritems()]
-                item_dict['url'] = data['resolved_url']
+            if data['status'] != '2' and int(data['time_added']) > minimum_time_added:
+                time_added = int(data['time_added'])
+                tags = [tag for tag, _ in data['tags'].iteritems()]
+                url = data['resolved_url']
+                pocket_id = data['item_id']
 
-                response_dict['items'].append(item_dict)
-
-                if not response_dict['lastest_date']:
-                    response_dict['lastest_date'] = item_dict['time_added']
-
-                if item_dict['time_added'] < response_dict['lastest_date']:
-                    response_dict['lastest_date'] = item_dict['time_added']
-
-    return response_dict
+                if not 'pocketgroups' in tags:
+                    new_article = Article(
+                        group=group,
+                        shared_by=user,
+                        time_added=time_added,
+                        link=url,
+                        pocket_id=pocket_id
+                    )
+                    new_article.save()

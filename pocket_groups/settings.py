@@ -47,8 +47,9 @@ INSTALLED_APPS = (
     'gunicorn',
     'south',
 
-    'core',
     'accounts',
+    'core',
+    'articles',
     'groups',
 )
 
