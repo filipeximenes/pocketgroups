@@ -17,10 +17,10 @@ hk-config-pull:
 	heroku config:pull --overwrite --app pocketgroups
 
 hk-deploy:
-	git push heroku-wk master
 	git push heroku master
 	heroku run python manage.py syncdb --app pocketgroups
 	heroku run python manage.py migrate --app pocketgroups
+	git push heroku-wk master
 
 hk-open:
 	heroku open --app pocketgroups

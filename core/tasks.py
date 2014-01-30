@@ -79,6 +79,7 @@ def process_and_add_to_feed(group, user, response):
     if items:
         for item_id, data in items.iteritems():
             if data['status'] != '2':
+                print data
                 time_updated = int(data['time_updated'])
                 tags = [tag for tag, _ in data['tags'].iteritems()]
                 url = data['resolved_url']
@@ -86,7 +87,6 @@ def process_and_add_to_feed(group, user, response):
                 resolved_id = data['resolved_id']
 
                 if not 'pocketgroups' in tags:
-                    print data
                     Article.objects.get_or_create(
                         group=group,
                         resolved_id=resolved_id,
