@@ -19,7 +19,7 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 app.conf.update(
     CELERYBEAT_SCHEDULE={
         'share-urls':{
-            'schedule': timedelta(seconds=30),
+            'schedule': timedelta(minutes=2),
             'task': 'core.tasks.fetch_groups'
         }
     })

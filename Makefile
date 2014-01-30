@@ -6,18 +6,21 @@ setup:
 
 hk-config:
 	heroku config --app pocketgroups
+	heroku config --app pocketgroups-wk
 
 hk-config-push:
 	heroku config:push --overwrite --app pocketgroups
+	heroku config:push --overwrite --app pocketgroups-wk
 
 hk-config-pull:
 	heroku config:pull --overwrite --app pocketgroups
 
-
 hk-deploy:
+	git push heroku-wk master
 	git push heroku master
-	heroku run python pocket_groups/manage.py syncdb --app pocketgroups
-	heroku run python pocket_groups/manage.py migrate --app pocketgroups
+	heroku run python manage.py syncdb --app pocketgroups
+	heroku run python manage.py migrate --app pocketgroups
+
 
 hk-open:
 	heroku open --app pocketgroups
