@@ -16,8 +16,13 @@ hk-config-pull:
 
 hk-deploy:
 	git push heroku master
-	heroku run python manage.py syncdb
-	heroku run python manage.py migrate
-	heroku run python manage.py collecticstatic
+	heroku run python pocket_groups/manage.py syncdb --app pocketgroups
+	heroku run python pocket_groups/manage.py migrate --app pocketgroups
+
+hk-open:
+	heroku open --app pocketgroups
+
+hk-logs:
+	heroku logs --app pocketgroups
 
 # python pip install -r requirements.txt; manage.py syncdb; python manage.py migrate;
