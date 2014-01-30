@@ -70,7 +70,6 @@ DATABASES = {
     'default': config(
         'DATABASE_URL', 
         # default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
-        default='postgres://pocketgroups:c0azML1FvKwCdr28iTJH3n1a57lRU2@pocketgroups.csaxi6ctki0o.us-east-1.rds.amazonaws.com:5432/pocketgroups',
         cast=db_url
     )
 }

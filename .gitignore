@@ -2,3 +2,4 @@
 deploy/
 celerybeat-schedule
 .env
+v.env
