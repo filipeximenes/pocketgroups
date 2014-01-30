@@ -63,17 +63,14 @@ WSGI_APPLICATION = 'pocket_groups.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+from dj_database_url import parse as db_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': config('DATABASE_URL', 
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        cast=db_url
+    )
 }
-
-# import dj_database_url
-# DATABASES = {}
-# DATABASES['dafault'] = dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -101,8 +98,8 @@ POCKET_CONSUMER_KEY = config('POCKET_CONSUMER_KEY', default='23252-73547210af1d7
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
 
 # CELERY
-BROKER_URL = config('BROKER_URL', default='amqp://@localhost:5672//')
 CELERY_TIMEZONE = TIME_ZONE
+BROKER_URL = config('BROKER_URL', default='amqp://@localhost:5672//')
 
 # Email
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
