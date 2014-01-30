@@ -103,12 +103,13 @@ TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django'
 CELERY_TIMEZONE = TIME_ZONE
 BROKER_POOL_LIMIT = 1
 CELERY_IGNORE_RESULT = True
-# CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
 BROKER_URL = config('BROKER_URL', default='amqp://@localhost:5672//')
 
 # Email
-EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.mandrillapp.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='pocketgroupsemail@gmail.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='c0azML1FvKwCdr28iTJH3n1a57lRU2')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='filipeximenes@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='QtmVamGldHn7r-YLXUQcig')
+
+MANDRILL_API_KEY = config('MANDRILL_API_KEY', default='AxTmZ6VhRHq7Us6BCr-wQg')
