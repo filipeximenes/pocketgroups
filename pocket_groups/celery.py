@@ -17,6 +17,7 @@ app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 app.conf.update(
+    BROKER_POOL_LIMIT=1,
     CELERYBEAT_SCHEDULE={
         'share-urls':{
             'schedule': timedelta(minutes=2),

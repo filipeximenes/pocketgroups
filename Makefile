@@ -30,4 +30,7 @@ hk-logs:
 hk-wk-logs:
 	heroku logs --app pocketgroups-wk
 
+hk-wk-restart:
+	heroku restart --app pocketgroups-wk
+
 # python pip install -r requirements.txt; manage.py syncdb; python manage.py migrate;
