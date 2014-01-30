@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 
     'widget_tweaks',
     'gunicorn',
+    'south',
 
     'core',
     'accounts',
@@ -66,8 +67,10 @@ WSGI_APPLICATION = 'pocket_groups.wsgi.application'
 from dj_database_url import parse as db_url
 
 DATABASES = {
-    'default': config('DATABASE_URL', 
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': config(
+        'DATABASE_URL', 
+        # default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        default='postgres://pocketgroups:c0azML1FvKwCdr28iTJH3n1a57lRU2@pocketgroups.csaxi6ctki0o.us-east-1.rds.amazonaws.com:5432/pocketgroups',
         cast=db_url
     )
 }
@@ -76,15 +79,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'America/Recife'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
