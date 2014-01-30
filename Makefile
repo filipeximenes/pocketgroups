@@ -21,7 +21,6 @@ hk-deploy:
 	heroku run python manage.py syncdb --app pocketgroups
 	heroku run python manage.py migrate --app pocketgroups
 
-
 hk-open:
 	heroku open --app pocketgroups
 
