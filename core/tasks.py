@@ -78,7 +78,7 @@ def process_and_add_to_feed(group, user, response):
 
     if items:
         for item_id, data in items.iteritems():
-            if data['status'] != '2':
+            if data['status'] != '2' and 'resolved_url' in data:
                 print data
                 time_updated = int(data['time_updated'])
                 tags = [tag for tag, _ in data['tags'].iteritems()]
