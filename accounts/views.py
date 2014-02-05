@@ -51,7 +51,7 @@ class LoginCallbackView(generic.RedirectView):
             user.pocket_access_token = credentials['access_token']
             user.save()
 
-            user.backend='django.contrib.auth.backends.ModelBackend' 
+            user.backend='django.contrib.auth.backends.ModelBackend'
 
             login(self.request, user)
 

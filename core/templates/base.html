@@ -3,7 +3,8 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-3.0.3/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap-3.0.3/css/bootstrap-theme.min.css' %}">
+    {# <link rel="stylesheet" href="{% static 'vendor/bootstrap-3.0.3/css/bootstrap-theme.min.css' %}"> #}
+    <link rel="stylesheet" href="{% static 'vendor/bootswatch/css/journal.min.css' %}">
     
     <script type="text/javascript" href="{% static 'vendor/bootstrap-3.0.3/js/bootstrap.min.js' %}"></script>
 
@@ -20,8 +21,9 @@
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="navbar-header"></div>
-            <a class="navbar-brand" href="/">Pocket Groups</a>
+          <div class="navbar-header">
+            <a href="/" class="navbar-brand">Pocket Groups</a>
+          </div>
         </div>
     </div>
     {% for message in messages %}
