@@ -4,7 +4,10 @@
     <div class="intro">
       <div class="vert-text">
         <h1>Share Pocket content with </br> your friends</h1>
-        <button type="button" class="btn btn-lg btn-danger login-button">Login with our pocket account</button>
+        <a href="{% url 'redirect-to-auth' %}">
+          <button type="button" class="btn btn-lg btn-danger login-button">Login with your pocket account</button>
+        </a>
       </div>
     </div>
+    <div class=""></div>
 {% endblock %}
