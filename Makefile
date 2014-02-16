@@ -5,6 +5,9 @@ setup:
 	./manage.py migrate
 	./manage.py createsuperuser --pocket_username=superuser
 
+sass:
+	cd core/static/sass; sass --watch style.scss:../css/app.css
+
 hk-config:
 	heroku config --app pocketgroups
 	heroku config --app pocketgroups-wk
