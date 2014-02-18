@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="intro">
@@ -9,5 +10,53 @@
         </a>
       </div>
     </div>
-    <div class=""></div>
+
+    <!-- description -->
+    <div class="description">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <img src="{% static 'img/star.png' %}">
+            <h2>pocketGroups it's a non-official </br> Pocket extension.</h2>
+            <hr>
+          </div>
+        </div>
+
+        <!-- itens -->
+        <div class="row item-description">
+          <div class="col-md-3 first-description text-center">
+            <div class="description-item">
+              <i class="description-icon icon-heart img1"></i>
+              <h3>Create a group</h3>
+              <h4>Invite friends with </br> commom interests.</h4>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="description-item">
+              <i class="description-icon img2">#</i>
+              <h3>Define a tag</h3>
+              <h4>This tag will be used as a trigger for the grouh4.</h4>
+            </div>
+          </div>
+          <div class="col-md-3 text-center">
+            <div class="description-item">
+              <i class="description-icon icon-share img3"></i>
+              <h3>Share content</h3>
+              <h4>All content tagged will be shared amoung group friends.</h4>
+            </div>
+          </div>
+        </div>
+        <!-- /itens -->
+      </div>
+    </div>
+    <div class="container text-center call-to-act">
+      <a href="{% url 'redirect-to-auth' %}">
+          <button type="button" class="btn btn-lg btn-warning">Start Now</button>
+      </a>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <p class="text-muted"></p>
+      </div>
+    </div>
 {% endblock %}
