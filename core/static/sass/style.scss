@@ -109,10 +109,19 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
 
 .call-to-act{
   button {
+    color: #ffffff;
+    background-color: #83ecb8;
+    border-color: #83ecb8;
     margin-top: 20px;
     margin-bottom: 2em;
     font-size: 28px;
     padding: 13px 22px;
+
+    &:hover {
+      color: #ffffff;
+      background-color: #73D8A6;
+      border-color: #73D8A6;
+    }
   }
 }
 

@@ -78,10 +78,17 @@
   color: #fbb64a; }
 
 .call-to-act button {
+  color: #ffffff;
+  background-color: #83ecb8;
+  border-color: #83ecb8;
   margin-top: 20px;
   margin-bottom: 2em;
   font-size: 28px;
   padding: 13px 22px; }
+  .call-to-act button:hover {
+    color: #ffffff;
+    background-color: #73D8A6;
+    border-color: #73D8A6; }
 
 .footer {
   background-color: #ed4255; }
