@@ -4,3 +4,4 @@ celerybeat-schedule
 .env
 v.env
 *.pyc
+*.scssc

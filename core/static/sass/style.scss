@@ -125,7 +125,21 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
   }
 }
 
-.footer {
-  background-color: #ed4255;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 25px;
+  background-color: #ed4255;
+}
