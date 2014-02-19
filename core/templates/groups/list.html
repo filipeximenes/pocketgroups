@@ -1,23 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extrastyle %}
+body {
+  background-color: #e9e9e9;
+}
+{% endblock %}
+
 {% block content %}
     <div class="container">
-    <div class="list-group"></div>
-        <h1>Groups</h1>
-        <a href="{% url 'groups:create' %}">
-            <button type="button" class="btn btn-info">create group</button>
-        </a>
+        <div class="row title-groups">
+            <div class="col-md-3">
+                <h1><i class="icon-group"></i> Groups</h1>
+            </div>
+            <div class="col-md-2 new-group">
+                <a href="{% url 'groups:create' %}">
+                    <button type="button" class="btn btn-info">create group</button>
+                </a>
+            </div>
+        </div>
+        
+       
         <div class="row">
             <ul>
             {% for group in pocket_groups.all %}
-                <li class="col-md-3 text-center">
-                    <h2>{{ group.name }}</h2>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h2>{{ group.name }}</h2>
                     <label>Tag: </label><span>{{ group.tag }}</span><br>
                     {% if group.owner == user %}
                         <a href="{% url 'groups:update' group.id %}">editar</a>
                     {% endif %}
-                </li>
+              </div>
+            </div>
             {% endfor %}
             </ul>
         </div>

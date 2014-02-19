@@ -1,3 +1,10 @@
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  margin-top: 83px; }
+
 .navbar-brand img {
   width: 332px; }
 
@@ -51,11 +58,10 @@
   width: 140px;
   margin-top: 3em;
   margin-bottom: 1em; }
-.description .first-description {
-  margin-left: 10em; }
 .description .item-description {
-  margin-top: 2em;
-  margin-bottom: 2em; }
+  margin-top: 2em; }
+.description .description-item {
+  margin-bottom: 4em; }
 .description i {
   border: 4px solid;
   border-radius: 50%;
@@ -77,26 +83,30 @@
   border-color: #fbb64a;
   color: #fbb64a; }
 
-.call-to-act button {
-  color: #ffffff;
-  background-color: #83ecb8;
-  border-color: #83ecb8;
-  margin-top: 20px;
-  margin-bottom: 2em;
-  font-size: 28px;
-  padding: 13px 22px; }
-  .call-to-act button:hover {
+.call-to-act {
+  margin-bottom: 2em; }
+  .call-to-act button {
     color: #ffffff;
-    background-color: #73D8A6;
-    border-color: #73D8A6; }
+    background-color: #83ecb8;
+    border-color: #83ecb8;
+    margin-top: 20px;
+    margin-bottom: 2em;
+    font-size: 28px;
+    padding: 13px 22px; }
+    .call-to-act button:hover {
+      color: #ffffff;
+      background-color: #73D8A6;
+      border-color: #73D8A6; }
+    .call-to-act button:focus {
+      color: #ffffff; }
 
-html {
-  position: relative;
-  min-height: 100%; }
+.title-groups {
+  padding-top: 1em;
+  padding-bottom: 2em; }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px; }
+.new-group {
+  padding-top: 25px;
+  padding-left: 0; }
 
 .footer {
   position: absolute;

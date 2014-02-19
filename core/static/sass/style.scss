@@ -1,3 +1,12 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-top: 83px;
+}
+
 .navbar-brand {
   img{
     width: 332px;
@@ -69,13 +78,12 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
     margin-bottom: 1em;
   }
 
-  .first-description {
-    margin-left: 10em;
-  }
-
   .item-description {
     margin-top: 2em;
-    margin-bottom: 2em;
+  }
+
+  .description-item {
+    margin-bottom: 4em;
   }
 
   i {
@@ -108,6 +116,8 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
 }
 
 .call-to-act{
+  margin-bottom: 2em;
+
   button {
     color: #ffffff;
     background-color: #83ecb8;
@@ -122,17 +132,21 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
       background-color: #73D8A6;
       border-color: #73D8A6;
     }
+
+    &:focus {
+      color: #ffffff;
+    }
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.title-groups {
+  padding-top: 1em;
+  padding-bottom: 2em;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.new-group {
+  padding-top: 25px;
+  padding-left: 0;
 }
 
 .footer {
