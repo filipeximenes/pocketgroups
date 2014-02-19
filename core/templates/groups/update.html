@@ -1,6 +1,12 @@
 
 {% extends "base.html" %}
 
+{% block extrastyle %}
+body {
+  background-color: #e9e9e9;
+}
+{% endblock %}
+
 {% block content %}
     <h1>Edit Group</h1>
     {% include 'groups/form.html' %}

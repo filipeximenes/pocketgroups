@@ -5,6 +5,9 @@ html {
 body {
   margin-top: 78px; }
 
+.alert {
+  padding-top: 22px; }
+
 .navbar-brand img {
   width: 332px;
   display: inherit; }
@@ -118,6 +121,30 @@ body {
 .new-group {
   padding-top: 25px;
   padding-left: 0; }
+
+.last-item {
+  margin-bottom: 4em; }
+
+@media (min-width: 451px) {
+  .edit-mobile {
+    display: none; } }
+.edit-mobile {
+  margin-left: 1em;
+  color: #479DB6;
+  cursor: pointer; }
+  .edit-mobile:hover {
+    text-decoration: none; }
+
+@media (max-width: 450px) {
+  .edit-group {
+    display: none; } }
+.edit-group {
+  padding-top: 1em;
+  text-align: right; }
+  .edit-group a {
+    font-size: 4em; }
+    .edit-group a:hover {
+      text-decoration: none; }
 
 .footer {
   position: absolute;
