@@ -177,6 +177,10 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
   margin-bottom: 4em;
 }
 
+.first-item {
+  display: none;
+}
+
 @media (min-width: 451px){
     .edit-mobile{
       display: none;
@@ -210,6 +214,26 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
       text-decoration: none;
     }
   }
+}
+
+.form-group {
+  input {
+    margin-bottom: 5px;
+  }
+}
+
+.mail-members {
+  padding-top: 13px;
+  padding-bottom: 0px;
+}
+
+.remove-member{
+  text-align: right;
+  padding-top: 3px;
+}
+
+.buttom-form {
+  text-align: right;
 }
 
 .footer {

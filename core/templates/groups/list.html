@@ -24,7 +24,12 @@ body {
           <div class="panel-body">
             <div class="col-md-9 col-sm-9 col-xs-10">
               <h1>{{ group.name }}</h1>
-              <h5><i class="icon-tag"></i> Tag: {{ group.tag }} <a class="edit-mobile"> <i class="icon-edit"></i> edit</a></h5>
+              <h5>
+                <i class="icon-tag"></i> Tag: {{ group.tag }} 
+                {% if group.owner == user %}
+                  <a class="edit-mobile"> <i class="icon-edit"></i> edit</a>
+                {% endif %}
+              </h5>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-2 edit-group">
               {% if group.owner == user %}

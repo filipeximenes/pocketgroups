@@ -8,6 +8,12 @@ body {
 {% endblock %}
 
 {% block content %}
-    <h1>New Group</h1>
-    {% include 'groups/form.html' %}
+<div class="container">
+  <div class="row title-groups">
+    <div class="title">
+        <h1>New group</h1>
+    </div>
+  </div>
+  {% include 'groups/form.html' %}
+</div>
 {% endblock %}
