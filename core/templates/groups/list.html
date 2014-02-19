@@ -10,31 +10,25 @@ body {
 {% block content %}
     <div class="container">
         <div class="row title-groups">
-            <div class="col-md-3">
+            <div class="title">
                 <h1><i class="icon-group"></i> Groups</h1>
             </div>
-            <div class="col-md-2 new-group">
+            <div class="col-md-2 col-sm-2 col-xs-3 new-group">
                 <a href="{% url 'groups:create' %}">
                     <button type="button" class="btn btn-info">create group</button>
                 </a>
             </div>
         </div>
-        
-       
-        <div class="row">
-            <ul>
-            {% for group in pocket_groups.all %}
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <h2>{{ group.name }}</h2>
-                    <label>Tag: </label><span>{{ group.tag }}</span><br>
-                    {% if group.owner == user %}
-                        <a href="{% url 'groups:update' group.id %}">editar</a>
-                    {% endif %}
-              </div>
-            </div>
-            {% endfor %}
-            </ul>
+        {% for group in pocket_groups.all %}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h2>{{ group.name }}</h2>
+                <label>Tag: </label><span>{{ group.tag }}</span><br>
+                {% if group.owner == user %}
+                    <a href="{% url 'groups:update' group.id %}">editar</a>
+                {% endif %}
+          </div>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}

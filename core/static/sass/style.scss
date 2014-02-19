@@ -4,12 +4,13 @@ html {
 }
 
 body {
-  margin-top: 83px;
+  margin-top: 78px;
 }
 
 .navbar-brand {
   img{
     width: 332px;
+    display: inherit;
   }
 }
 
@@ -63,6 +64,16 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
     margin: 0;
     font-size: 4.5em;
     font-weight: 700;
+  }
+
+  @media (max-width: 450px){
+      a {
+        display: none;
+      }
+
+      h1{
+        width: 100%;
+      }
   }
 }
 
@@ -142,6 +153,15 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
 .title-groups {
   padding-top: 1em;
   padding-bottom: 2em;
+
+  .title {
+    width:auto; 
+    float:left;
+  }
+
+  h1 {
+    margin-right: 24px;
+  }
 }
 
 .new-group {
