@@ -7,6 +7,13 @@
     <script type="text/javascript" href="{% static 'vendor/bootstrap-3.0.3/js/bootstrap.min.js' %}"></script>
     <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <!-- Facebook Tags -->
+    <meta property="og:url" content="http://www.getpocketgroup.com"/>
+    <meta property="og:image" content="{% static 'img/fb-img.png' %}"/>
+    <meta property="og:title" content="pocketGroups | Unofficial Pocket Extension"/>
+    <meta property="og:description" content="pocketGroups it's a non-official Pocket extension."/>
+
     <title>pocketGroups | Unofficial Pocket Extension</title>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -21,7 +28,7 @@
     <div class="navbar navbar-fixed-top header-global " role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'index' %}"><img class="img-responsive" src="{% static 'img/pocketgroup_logo3.png' %}"></a>
+            <a class="navbar-brand" href="{% url 'index' %}"><img class="img-responsive" src="{% static 'img/pocketgroup_logo.png' %}"></a>
           </div>
         </div>
     </div>
