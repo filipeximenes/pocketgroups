@@ -30,6 +30,7 @@ body {
                   <a class="edit-mobile"> <i class="icon-edit"></i> edit</a>
                 {% endif %}
               </h5>
+              <h5><i class="icon-user"></i> Admin: {{ group.owner }}</h5>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-2 edit-group">
               {% if group.owner == user %}
