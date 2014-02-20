@@ -23,9 +23,9 @@ body {
     </div>
     {% if form.instance.id %}
         {% for member in form.instance.members.all %}
-            {% if member != user %}
-                <div class="panel panel-default {% if forloop.last %}last-item{% endif %} {% if forloop.first %}first-item{% endif %}">
-                    <div class="panel-body mail-members">
+            <div class="panel panel-default {% if forloop.last %}last-item{% endif %} {% if forloop.first %}first-item{% endif %}">
+                <div class="panel-body mail-members">
+                    {% if member != user %}
                         <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="member_id" value="{{ member.id }}">
@@ -38,9 +38,9 @@ body {
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    {% endif %}
                 </div>
-            {% endif %}
+            </div>
         {% endfor %}
     {% endif %}
 </div>
