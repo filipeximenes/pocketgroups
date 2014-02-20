@@ -141,13 +141,13 @@ body {
 @media (max-width: 450px) {
   .edit-group {
     display: none; } }
+.panel h1, .panel h5 {
+  color: #333; }
+
 .edit-group {
-  padding-top: 1em;
-  text-align: right; }
-  .edit-group a {
-    font-size: 4em; }
-    .edit-group a:hover {
-      text-decoration: none; }
+  padding-top: 32px;
+  text-align: right;
+  font-size: 4em; }
 
 .form-group input {
   margin-bottom: 5px; }

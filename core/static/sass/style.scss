@@ -203,17 +203,16 @@ box-shadow: 0 0 5px rgba(0,0,0,.15);
     }
 }
 
-.edit-group{
-  padding-top: 1em;
-  text-align: right;
-
-  a{
-    font-size: 4em;
-
-    &:hover {
-      text-decoration: none;
-    }
+.panel{
+  h1, h5 {
+    color: #333;
   }
+}
+
+.edit-group{
+  padding-top: 32px;
+  text-align: right;
+  font-size: 4em;
 }
 
 .form-group {
