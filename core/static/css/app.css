@@ -144,6 +144,9 @@ body {
 .panel h1, .panel h5 {
   color: #333; }
 
+.members-list {
+  margin-bottom: 4em; }
+
 .edit-group {
   padding-top: 32px;
   text-align: right;

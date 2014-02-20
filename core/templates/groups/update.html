@@ -21,26 +21,28 @@ body {
             <h1><i class="icon-user"></i> Members list:</h1>
         </div>
     </div>
-    {% for member in form.instance.members.all %}
-        {% if member != user %}
-            <div class="panel panel-default {% if forloop.last %}last-item{% endif %}">
-                <div class="panel-body mail-members">
-                    <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="member_id" value="{{ member.id }}">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <h4><i class="icon-envelope-alt"></i> {{ member.pocket_username }}</h4> 
+    <div class="members-list">
+        {% for member in form.instance.members.all %}
+            {% if member != user %}
+                <div class="panel panel-default">
+                    <div class="panel-body mail-members">
+                        <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="member_id" value="{{ member.id }}">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4><i class="icon-envelope-alt"></i> {{ member.pocket_username }}</h4> 
+                                </div>
+                                <div class="col-md-3 remove-member">
+                                    <small><input class="btn btn-danger" type='submit' value="remove"></small>
+                                </div>
                             </div>
-                            <div class="col-md-3 remove-member">
-                                <small><input class="btn btn-danger" type='submit' value="remove"></small>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
 
