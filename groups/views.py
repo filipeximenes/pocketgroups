@@ -70,10 +70,6 @@ class GroupUpdateView(UserPassesTestMixin, GroupFormMixin, generic.UpdateView):
     template_name = 'groups/update.html'
     form_valid_message = 'Group successifully updated.'
 
-    def get_context_data(self, **kwargs):
-        print kwargs['form'].instance.members.all()
-        return kwargs
-
     def test_func(self, user):
         return user == self.get_object().owner
 
