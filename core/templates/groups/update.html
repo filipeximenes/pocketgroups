@@ -23,7 +23,7 @@ body {
     </div>
     {% if form.instance.id %}
         {% for member in form.instance.members.all %}
-        <div class="panel panel-default {% if forloop.last %}last-item{% endif %}{% if forloop.first %}first-item{% endif %}">
+        <div class="panel panel-default {% if forloop.last %}last-item{% endif %} {% if forloop.first %}first-item{% endif %}">
             <div class="panel-body mail-members">
                 {% if member != user %}
                     <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
