@@ -149,10 +149,8 @@ body {
   border-color: #CACACA; }
 
 .goback-buttom {
-  float: right;
-  margin: 20px; }
-
-.members-list {
+  float: left;
+  margin-top: 1em;
   margin-bottom: 4em; }
 
 .edit-group {

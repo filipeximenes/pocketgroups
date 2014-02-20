@@ -13,12 +13,12 @@ body {
     <div class="title">
         <h1>New group</h1>
     </div>
-    <div class="goback-buttom">
-      <a href="{% url 'groups:list' %}">
-        <button class="btn btn-lg btn-default"><i class="icon-arrow-left"></i> Back</button>
-      </a>
-    </div>
   </div>
   {% include 'groups/form.html' %}
+      <div class="goback-buttom">
+        <a href="{% url 'groups:list' %}">
+          <button class="btn btn-lg btn-default"><i class="icon-arrow-left"></i> Back</button>
+        </a>
+    </div>
 </div>
 {% endblock %}
