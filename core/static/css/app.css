@@ -144,6 +144,14 @@ body {
 .panel h1, .panel h5 {
   color: #333; }
 
+.update-group hr {
+  margin-top: 5em;
+  border-color: #CACACA; }
+
+.goback-buttom {
+  float: right;
+  margin: 20px; }
+
 .members-list {
   margin-bottom: 4em; }
 

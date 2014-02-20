@@ -8,14 +8,19 @@ body {
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container update-group">
     <div class="row title-groups">
         <div class="title">
             <h1><i class="icon-info-sign"></i> General information:</h1>
         </div>
+        <div class="goback-buttom">
+          <a href="{% url 'groups:list' %}">
+            <button class="btn btn-lg btn-default"><i class="icon-arrow-left"></i> Back</button>
+          </a>
+        </div>
     </div>
     {% include 'groups/form.html' %}
-
+    <hr>
     <div class="row title-groups">
         <div class="title">
             <h1><i class="icon-user"></i> Members list:</h1>
