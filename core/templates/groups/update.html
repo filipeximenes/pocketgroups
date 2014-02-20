@@ -21,11 +21,10 @@ body {
             <h1><i class="icon-user"></i> Members list:</h1>
         </div>
     </div>
-    {% if form.instance.id %}
-        {% for member in form.instance.members.all %}
-        <div class="panel panel-default {% if forloop.last %}last-item{% endif %} {% if forloop.first %}first-item{% endif %}">
-            <div class="panel-body mail-members">
-                {% if member != user %}
+    {% for member in form.instance.members.all %}
+        {% if member != user %}
+            <div class="panel panel-default {% if forloop.last %}last-item{% endif %}">
+                <div class="panel-body mail-members">
                     <form method="post" action="{% url 'groups:remove-member' form.instance.id %}">
                         {% csrf_token %}
                         <input type="hidden" name="member_id" value="{{ member.id }}">
@@ -38,11 +37,10 @@ body {
                             </div>
                         </div>
                     </form>
-                {% endif %}
+                </div>
             </div>
-        </div>
-        {% endfor %}
-    {% endif %}
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
 
