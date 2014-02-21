@@ -26,6 +26,7 @@ def fetch_groups():
 
 @celery_app.task
 def share_group_urls(group_id):
+    headers = None
     group = PocketGroup.objects.get(id=group_id)
     members = group.members.all()
 
