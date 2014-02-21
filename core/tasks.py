@@ -38,17 +38,18 @@ def share_group_urls(group_id):
             else:
                 last_update = int(dateformat.format(now() - datetime.timedelta(days=1), 'U'))
             last_update += 1
-
-            pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
-            response, headers = pocket_cli.get(
+            try:
+                pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
+                response, headers = pocket_cli.get(
                     state='all',
                     tag=group.tag,
                     detailType='complete',
                     sort='oldest',
                     since=last_update
                 )
-
-            process_and_add_to_feed(group, member, response)
+                process_and_add_to_feed(group, member, response)
+            except:
+                pass
 
     feed = group.feed.order_by('time_updated')
     if group.last_synced_article:
@@ -57,15 +58,18 @@ def share_group_urls(group_id):
 
     for member in members:
         if member.pocket_access_token:
-            pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
+            try:
+                pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
 
-            for article in feed:
-                if article.shared_by != member:
-                    logger.info('Sharing: %s - %s' % (member.pocket_username, article.link))
-                    pocket_cli.add(
-                        url=article.link,
-                        tags='pocketgroups,' + group.tag + ',' + article.shared_by.pocket_username
-                    )
+                for article in feed:
+                    if article.shared_by != member:
+                        logger.info('Sharing: %s - %s' % (member.pocket_username, article.link))
+                        pocket_cli.add(
+                            url=article.link,
+                            tags='pocketgroups,' + group.tag + ',' + article.shared_by.pocket_username
+                        )
+            except:
+                pass
 
     group.last_synced_article = group.feed.order_by('id').last()
     group.save()
