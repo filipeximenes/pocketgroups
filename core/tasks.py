@@ -26,7 +26,7 @@ def fetch_groups():
 
 @celery_app.task
 def share_group_urls(group_id):
-    headers = None
+    headers = {}
     group = PocketGroup.objects.get(id=group_id)
     members = group.members.all()
 
@@ -74,8 +74,8 @@ def share_group_urls(group_id):
 
     group.last_synced_article = group.feed.order_by('id').last()
     group.save()
-
-    logger.info('Remaining API calls (for the current hour): %s' % headers['x-limit-key-remaining'])
+    if 'x-limit-key-remaining' in headers:
+        logger.info('Remaining API calls (for the current hour): %s' % headers['x-limit-key-remaining'])
 
 
 def process_and_add_to_feed(group, user, response):
