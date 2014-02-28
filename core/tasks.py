@@ -39,18 +39,19 @@ def share_group_urls(group_id):
             else:
                 last_update = int(dateformat.format(now() - datetime.timedelta(days=1), 'U'))
             last_update += 1
-            try:
-                pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
-                response, headers = pocket_cli.get(
-                    state='all',
-                    tag=group.tag,
-                    detailType='complete',
-                    sort='oldest',
-                    since=last_update
-                )
-                process_and_add_to_feed(group, member, response)
-            except:
-                pass
+            
+            # try:
+            pocket_cli = Pocket(settings.POCKET_CONSUMER_KEY, member.pocket_access_token)
+            response, headers = pocket_cli.get(
+                state='all',
+                tag=group.tag,
+                detailType='complete',
+                sort='oldest',
+                since=last_update
+            )
+            process_and_add_to_feed(group, member, response)
+            # except:
+            #     logger.info('Could not fetch data for %s' % member)
 
     feed = group.feed.order_by('time_updated')
     if group.last_synced_article:
@@ -74,6 +75,8 @@ def share_group_urls(group_id):
 
     group.last_synced_article = group.feed.order_by('id').last()
     group.save()
+
+    logger.info(headers)
     if 'x-limit-key-remaining' in headers:
         logger.info('Remaining API calls (for the current hour): %s' % headers['x-limit-key-remaining'])
 
