@@ -1,5 +1,5 @@
 
-{% block subject %}Pocket Groups private BETA{% endblock %}
+{% block subject %}Sharereads private BETA{% endblock %}
 
 {% block html %}
   <p>Hi,</p>
@@ -9,7 +9,7 @@
     </p>
     <p>
         After accepting the invitation, every time you tag a item in <strong>Pocket</strong> with "{{ group.tag }}", it will be shared among group members.
-        <strong>Pocket Groups</strong> is in Private BETA, click the link bellow to login to Pocket and join the group:
+        <strong>Sharereads</strong> is in Private BETA, click the link bellow to login to Pocket and join the group:
     </p>
     <a href="http://www.getpocketgroups.com/redirect_to_pocket_auth/?user_localizer={{ user.localizer }}">Enter the group</a>
     <p>Thanks, you rock!</p>
