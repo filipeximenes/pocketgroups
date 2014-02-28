@@ -32,10 +32,13 @@ class RedirectToAuthView(generic.RedirectView):
         redirect_url = self.request.build_absolute_uri(reverse('pocket-login-callback') + 
             '?request_token=' + request_token)
 
-        invited = self.request.GET.get('user_localizer', None)
-        if invited:
-            self.request.session['user_localizer'] = invited
+        self.save_invited_user_to_session()
 
         auth_url = Pocket.get_auth_url(code=request_token, redirect_uri=redirect_url)
 
         return auth_url
+
+    def save_invited_user_to_session(self):
+        invited = self.request.GET.get('user_localizer', None)
+        if invited:
+            self.request.session['user_localizer'] = invited

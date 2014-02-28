@@ -23,27 +23,7 @@ class LoginCallbackView(generic.RedirectView):
                 code=request_token
                 )
 
-            email = None
-            localized = None
-
-            user = get_user_model().objects.filter(pocket_username=credentials['username']).first()
-
-            localizer = self.request.session.get('user_localizer', None)
-            if localizer:
-                localized = get_user_model().objects.filter(localizer=localizer).first()
-
-            if localized:
-                email = localized.email
-                if user:
-                    groups = localized.pocket_groups.values_list('id', flat=True)
-                    user.pocket_groups.add(*groups)
-                    if not localized.is_active:
-                        localized.delete()
-                else:
-                    user = localized
-
-            if not user:
-                user = UserAccount()
+            user, email = self.process_logged_user_info(credentials['username'])
 
             user.is_active = True
             user.email = email or user.email
@@ -52,10 +32,33 @@ class LoginCallbackView(generic.RedirectView):
             user.save()
 
             user.backend='django.contrib.auth.backends.ModelBackend'
-
             login(self.request, user)
 
             return reverse('groups:list')
-        
+
         return '/'
 
+    def process_logged_user_info(self, username):
+        email = None
+        localized = None
+
+        user = get_user_model().objects.filter(pocket_username=username).first()
+
+        localizer = self.request.session.get('user_localizer', None)
+        if localizer:
+            localized = get_user_model().objects.filter(localizer=localizer).first()
+
+        if localized:
+            email = localized.email
+            if user:
+                groups = localized.pocket_groups.values_list('id', flat=True)
+                user.pocket_groups.add(*groups)
+                if not localized.is_active:
+                    localized.delete()
+            else:
+                user = localized
+
+        if not user:
+            user = UserAccount()
+
+        return user, email
