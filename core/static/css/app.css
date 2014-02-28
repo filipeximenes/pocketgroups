@@ -5,11 +5,13 @@ html {
 body {
   margin-top: 78px; }
 
+des
 .alert {
-  padding-top: 22px; }
+  padding-top: 30px;
+  padding-bottom: 11px; }
 
 .navbar-brand img {
-  width: 332px;
+  width: 250px;
   display: inherit; }
 
 .header-global {
@@ -60,51 +62,64 @@ body {
     .vert-text h1 {
       width: 100%; } }
 
-.description h4 {
-  font-size: 20px;
-  font-weight: 100; }
-.description img {
-  width: 140px;
-  margin-top: 3em;
-  margin-bottom: 1em; }
-.description .item-description {
+.description {
   margin-top: 2em; }
-.description .description-item {
-  margin-bottom: 4em; }
-.description i {
-  border: 4px solid;
-  border-radius: 50%;
-  display: inline-block;
-  font-size: 74px;
-  width: 140px;
-  height: 140px;
-  line-height: 136px;
-  vertical-align: middle;
-  text-align: center; }
-.description .img1 {
-  border-color: #83ecb8;
-  color: #83ecb8; }
-.description .img2 {
-  border-color: #ed4255;
-  color: #ed4255;
-  font-weight: 900; }
-.description .img3 {
-  border-color: #fbb64a;
-  color: #fbb64a; }
+  .description h4 {
+    font-size: 20px;
+    font-weight: 100; }
+  .description img {
+    width: 140px;
+    margin-top: 3em;
+    margin-bottom: 1em; }
+  .description .item-description {
+    margin-top: 2em; }
+  .description .description-item {
+    margin-bottom: 4em; }
+  .description i {
+    border: 4px solid;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 74px;
+    width: 140px;
+    height: 140px;
+    line-height: 136px;
+    vertical-align: middle;
+    text-align: center; }
+  .description .img1 {
+    border-color: #3FADA8;
+    color: #3FADA8; }
+  .description .img2 {
+    border-color: #ed4255;
+    color: #ed4255;
+    font-weight: 900; }
+  .description .img3 {
+    border-color: #fbb64a;
+    color: #fbb64a; }
+
+.login {
+  color: #ffffff;
+  background-color: #547A81;
+  border-color: #537980; }
+  .login:hover {
+    color: #ffffff;
+    background-color: #4C696F;
+    border-color: #48676D; }
+  .login:focus {
+    color: #ffffff; }
 
 .call-to-act {
   margin-bottom: 2em; }
   .call-to-act button {
     color: #ffffff;
-    background-color: #83ecb8;
-    border-color: #83ecb8;
+    background-color: #3FADA8;
+    border-color: #3FADA8;
     margin-top: 20px;
     margin-bottom: 2em;
     font-size: 28px;
     padding: 13px 22px; }
     .call-to-act button:hover {
       color: #ffffff;
-      background-color: #73D8A6;
+      background-color: #38918C;
       border-color: #73D8A6; }
     .call-to-act button:focus {
       color: #ffffff; }
@@ -178,4 +193,4 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 25px;
-  background-color: #ed4255; }
+  background-color: #3FADA8; }
