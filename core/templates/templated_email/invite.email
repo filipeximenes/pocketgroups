@@ -11,6 +11,6 @@
         After accepting the invitation, every time you tag a item in <strong>Pocket</strong> with "{{ group.tag }}", it will be shared among group members.
         <strong>Sharereads</strong> is in Private BETA, click the link bellow to login to Pocket and join the group:
     </p>
-    <a href="http://www.getpocketgroups.com/redirect_to_pocket_auth/?user_localizer={{ user.localizer }}">Enter the group</a>
+    <a href="http://www.sharereads.com/redirect_to_pocket_auth/?user_localizer={{ user.localizer }}">Enter the group</a>
     <p>Thanks, you rock!</p>
 {% endblock %}
