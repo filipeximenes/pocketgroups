@@ -41,8 +41,10 @@ class GroupFormMixin(LoginRequiredMixin, FormMessagesMixin):
         for i in range(5):
             email = form.data.get('invite-email'+str(i), None)
             if email:
-                user, created = get_user_model().objects.get_or_create(
-                    email=email, defaults={'pocket_username': email})
+                user = get_user_model().objects.filter(pocket_username=email).first()
+                if not user:
+                    user, created = get_user_model().objects.get_or_create(
+                        email=email, defaults={'pocket_username': email})
                 invited_users.append(user.id)
 
         if invited_users:
