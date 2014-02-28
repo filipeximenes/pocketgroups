@@ -29,4 +29,4 @@ requests==2.2.1
 six==1.5.2
 static==1.0.2
 wsgiref==0.1.2
-git+https://github.com/filipeximenes/pocket.git@4bb8ae33c2dfd7711e217ce3ad99762c252db266#egg=pocket
+-e git+https://github.com/filipeximenes/pocket.git#egg=pocket
