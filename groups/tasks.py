@@ -19,7 +19,7 @@ def send_invite_emails(group_id, invited_users_ids):
     for user in users:
         send_templated_mail(
             template_name='invite',
-            from_email='no-reply@getpocketgroups.com',
+            from_email='no-reply@sharereads.com',
             recipient_list=[user.email],
             context={
                 'user': user,

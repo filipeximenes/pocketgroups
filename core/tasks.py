@@ -68,7 +68,7 @@ def share_group_urls(group_id):
                         logger.info('Sharing: %s - %s' % (member.pocket_username, article.link))
                         pocket_cli.add(
                             url=article.link,
-                            tags='pocketgroups,' + group.tag + ',' + article.shared_by.pocket_username
+                            tags='sharereads,' + group.tag + ',' + article.shared_by.pocket_username
                         )
             except:
                 pass
@@ -94,7 +94,7 @@ def process_and_add_to_feed(group, user, response):
                 pocket_id = data['item_id']
                 resolved_id = data['resolved_id']
 
-                if not 'pocketgroups' in tags:
+                if not 'sharereads' in tags:
                     Article.objects.get_or_create(
                         group=group,
                         resolved_id=resolved_id,
